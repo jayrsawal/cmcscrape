@@ -1,0 +1,403 @@
+body {
+    font-family: "Arial" !important;
+    overflow-x: hidden;
+}
+
+body div.navbar {
+    z-index: 100 !important;
+    border-radius: 0 !important;
+}
+
+img.loading {
+    width: 100%;
+    height: 100%;
+}
+
+#search-result-container, #add-term, #search-box
+, #search-box table, #search-dialog, #search-dialog-title
+, #search-dialog svg, #search-dialog .slider, .term-container
+, #search-keyword-dialog { 
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.doc {
+    min-height: 200px;
+    font-size: 14px;
+    color: #777;
+    border-bottom: 1px solid #eee;
+    padding: 21px 13px 34px 13px;
+}
+
+.doc:last-child {
+    border: none;
+}
+
+h3 {
+    margin: 18px 0px;
+    font-size: 12px;
+    color: lightgray;
+}
+
+.doc .doc-title {
+    font-size: 20px;
+    color: slategrey;
+}
+
+.doc .doc-author {
+    
+}
+
+.doc .doc-cite {
+    font-style: italic;
+}
+
+ul.doc-term {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.doc-term li {
+    display: inline-block;
+    padding-right: 16px;
+}
+
+#search-result-container {
+    width: 100vw;
+    height: 90vh;
+    padding-bottom: 200px;
+    overflow: scroll;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    z-index: 0;
+}
+
+#search-term-container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: white;
+    border-top: 1px solid lightgray;
+}
+
+#search-keyword-box {
+    position: absolute;
+    top: -50px;
+}
+
+#search-keyword-box #search-keyword {
+    height: 50px;
+    min-width: 250px;
+}
+
+#search-term-box {
+    overflow: scroll;
+    white-space: nowrap;
+    width: 90%;
+    padding-right: 15%;
+}
+
+#add-term, .term-container, .sortable-placeholder {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.term-container.custom-keyword {
+    width: 100px;
+    height: 100px;
+}
+
+#add-term {
+    width: 80px;
+    height: 80px;
+    background-color: #eee;
+    border-radius: 80px;
+    margin: 25px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+#add-term:hover {
+    background-color: lightgray;
+}
+
+#add-term span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 64px;
+}
+
+.custom-keyword-container, .keyword-container, .load-keyword {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+    margin: 15px;
+    float: left;
+    border: 1px solid lightgray;
+    background-color: rgba(168,209,255,0.5);
+    cursor: pointer;
+}
+
+.term-container {
+    position: relative;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.term-container:hover {
+    background-color: rgba(168,209,255,0.5);
+}
+
+.custom-keyword-container:hover {
+    background-color: rgba(0, 100, 150, 0.5);
+    cursor: pointer;
+}
+
+.term-container button.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: 900;
+    position: absolute;
+    font-size: 24px;
+    display: none;
+}
+
+.term-container:hover button.close {
+    display: block;
+}
+
+.term-container.selected {
+    background-color: #a8d1ff;
+}
+
+.term-container.changed {
+    background-color: #eeddaa;
+}
+
+
+.sortable-placeholder {
+    border: 5px dashed #ddd;
+    min-width: 125px;
+    min-height: 125px;
+    margin: 10px;
+}
+
+.term-heading, .custom-keyword-container .keyword-heading
+, .keyword-container .keyword-heading, .custom-keyword-heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.5);
+    padding: 5px;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+.custom-keyword-heading {
+    color: black;
+}
+
+.keyword-heading {
+    color: slategray;
+    z-index: 1;
+}
+
+.keyword-vis {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.keyword-container:hover .keyword-heading {
+    color: black;
+}
+
+.custom-keyword-container:hover .keyword-heading {
+    color: white;
+}
+
+.term-container:hover .term-heading {
+    background-color: rgba(0, 100, 150, 0.5);
+    color: white;
+}
+
+a.search-term {
+    border-radius: 4px;
+    padding: 8px;
+    color: slategrey;
+    cursor: pointer;
+    line-height: 15px;
+}
+
+a.search-term.active {
+    background: lightgray;
+    color: white;
+}
+
+a.search-term:hover {
+    text-decoration: none;
+    background: lightgray;
+    color: #777;
+}
+
+#search-box {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 85px;
+    height: 85px;
+    background-color: gray;
+    z-index: 5;
+    border-radius: 85px;
+}
+
+#search-box:hover {
+    height: 300px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+
+#search-box table {
+    opacity: 0;
+    border: none;
+    padding: 5px;
+    width: 100%;
+}
+
+#search-box table thead tr td {
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+}
+
+#search-box table tbody tr td {
+    padding: 5px 10px;
+    color: white;
+}
+#search-box table tbody tr td:last-child {
+    text-align: right;
+    cursor: pointer;
+    color: black;
+}
+
+#search-box:hover > table {
+    opacity: 1;
+}
+
+#search-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100px;
+    width: 10%;
+    height: 100%;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(0, 100, 150);
+    border: none;
+    border-radius: 0;
+}
+
+.slategray {
+    background-color: slategray !important;
+}
+
+text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.node--hover circle {
+    stroke: rgba(0,150,200,0.8);
+    stroke-width: 1.2px;
+}
+
+#search-dialog, #search-keyword-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 75px;
+    width: 95vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 1;
+    overflow: hidden;
+    border-right: 1px solid lightgray;
+}
+
+#search-keyword-container h1 {
+    padding-left: 15px;
+}
+
+#search-dialog button.close, #search-keyword-dialog button.close {
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 75px;
+    font-size: 24px;
+}
+
+#search-dialog-title {
+    background-color: rgba(0, 100, 150, 0.8);
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    top: 75px;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+}
+
+#search-dialog svg {
+    background-color: white;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+#search-dialog .slider {
+    position: absolute;
+    bottom: 190px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#search-keyword-home {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+    box-shadow: 0px 2px 1px #eee;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+#search-keyword-home::placeholder {
+    color: #eee;
+}
+
+#search-keyword-home:focus, #search-keyword-home:hover {
+    box-shadow: 0px 2px 2px #ddd;
+    outline: none;
+}
+
+#home-container h2 {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #eee;
+}
