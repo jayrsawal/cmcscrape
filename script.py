@@ -15,20 +15,13 @@ import requests
 import string
 import time
 import tweepy
+import json
 import pandas as pd
-import matplotlib
-matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime, timedelta
-from flask import *
 from lxml import html
 
-app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = CONST.UPLOAD_FOLDER
-app.secret_key = 'super secret key'
-app.config['SESSION_TYPE'] = 'filesystem'
-
-# Common variables
 db = db.Database()
 cmc_url = "https://coinmarketcap.com"
 twitter_token = "HtuEQkaaUwaZksAaKRKDpSrIC"
@@ -36,9 +29,14 @@ twitter_secret = "BeI6QYGD9OwzRpkiTYXVKzYs2GMIVelj0cu7ynqJViK9jqpK8d"
 twitter_access_token = "712132794-gnAMHJdrcoTK5ZcajEssFdEMb7ZUqXp3T3RzIV8P"
 twitter_access_secret = "GBBPuVCzt4iOXmYGOB0YibiVrlPcOu2skrt4JDpYXb5fs"
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+def main():
+    # print("getting coin list...")
+    # getCoinList()
+    # print("saving markets...")
+    # saveMarkets()
+    print("getting historic price...")
+    getAllCoinTicks()
+    print("done.")
 
 
 def getCoinList():
@@ -235,7 +233,6 @@ def getAllCoinTicks():
         except:
             pass
 
-
 def getCorrelation():
     results = db.execQuery("""
         select epoch, price from historic where coin='bitcoin' 
@@ -250,9 +247,9 @@ def getCorrelation():
     price['2017'] = getPriceSeries("2017").values
     price['2018'] = getPriceSeries("2018").values
     c = price.corr()
-    print c
     sns.heatmap(c, xticklabels=c.columns.values, yticklabels=c.columns.values)
-    matplotlib.pyplot.show()
+    plt.show()
+
 
 def getPriceSeries(year):
     results = db.execQuery("""
@@ -265,13 +262,5 @@ def getPriceSeries(year):
     return pd.Series(data)
 
 
-getCorrelation()
-# getCoinTicks()
-# getRedditHeadlines()
-# getTweets()
-# getCoinList()
-# saveMarkets()
 
-if __name__ == "__main__":
-    sess.init_app(app)
-    app.run(debug=True)
+if __name__ == '__main__': getCorrelation()
